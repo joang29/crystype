@@ -27,7 +27,7 @@ void detectType(){
 		std::cout<<"\033["<<currentLine<<";"<<cursorPositionX<<"f";
 		char pressedKey = getchar();
 		
-		if(pressedKey==127){
+		if(pressedKey==127 && cursorPositionX>1){
 			std::cout<<"\b\b\b"<<typingTest[amountOfPressedKeys-1]<<typingTest[amountOfPressedKeys]<<typingTest[amountOfPressedKeys+1];
 			std::cout<<"\033["<<currentLine<<";"<<amountOfPressedKeys<<"f";
 			amountOfPressedKeys--;

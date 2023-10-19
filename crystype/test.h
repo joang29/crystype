@@ -5,7 +5,7 @@
 
 void startTest();
 void selectTest();
-void printWords(int);
+void printWords();
 bool returnIfTimerIsOn();
 std::string returnTest();
 int returnSecondsTest();

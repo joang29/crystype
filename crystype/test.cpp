@@ -1,86 +1,66 @@
+#include <bits/chrono.h>
+#include <chrono>
+#include <cmath>
 #include<iostream>
 #include<unistd.h>
 #include<thread>
+#include<sys/ioctl.h>
 
 #include "detectType.h"
 #include "results.h"
 
 void printWords();
-void selectTest();
-void startTimer(int);
 std::string returnTest();
 
-bool timerIsOn = true;
+std::chrono::duration<double> duration;
 std::string test;
-int secondsTest;
 std::string words[100] = {"he", "she", "we", "they", "it", "you" ,"too", "have", "there", "write", "which", "where", "what", "who", "how", "all", "sometimes" ,"word", "world", "old", "can", "must", "might", "would", "make", "about", "know", "will", "as", "people", "like", "because", "tell", "always" ,"say", "find", "through", "life", "while", "person", "answer", "never", "problem", "believe", "point", "thought", "business", "city", "continue", "pay", "car", "however", "allow", "although", "home", "plan", "effect", "suggest", "action", "easy", "work", "between", "same", "program", "take", "high", "number", "custom", "star", "right" , "table", "ability", "character", "left", "expert", "cold", "avoid", "finish", "theory", "improve", "list", "lesson", "package", "range", "best", "style", "discover", "weight", "fly", "production", "impact", "talk", "me", "close", "imagine", "visit", "main", "note", "radio","laugh"};
 	
 void startTest(){
-	std::cout<<"\033[38;5;97m\033[1;0fPress any key to start";
+	struct winsize size;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
+	
+	std::cout<<"\033[38;5;14m\033["<<round(size.ws_row/2.0)-6<<";"<<round(size.ws_col/2.0)-30<<"fPress any key to start";
 	getchar();
-	std::cout<<"\033[1;0f\033[2K";
+	std::cout<<"\033["<<round(size.ws_row/2.0)-6<<";"<<round(size.ws_col/2.0)-30<<"f\033[2K";
+	
+	std::chrono::high_resolution_clock::time_point time = std::chrono::high_resolution_clock::now();
 
-	std::thread typing(detectType);
-	std::thread timerThread(startTimer, secondsTest);
-	timerThread.join();
-	typing.join();
+	detectType();
+		
+	std::chrono::high_resolution_clock::time_point finalTime = std::chrono::high_resolution_clock::now();
+	duration = std::chrono::duration_cast<std::chrono::duration<double>>(finalTime - time);
+
 	calculateWPMAndAccuracy();
 }
 
-void selectTest(){
-	std::cout<<"\033[5;0f\033[38;5;255m"<<"Press a number to select the test [1] 15s [2] 30s [3] 60s";
+void printWords(){
 	
-	secondsTest=0;
-
-	while(secondsTest == 0){
-		char number = getchar();
+	struct winsize size;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
 	
-		switch(number){
-			case '1':
-				secondsTest = 15;
-			break;
-			case '2':
-				secondsTest = 30;
-			break;
-			case '3':
-				secondsTest = 60;
-		}
-	}
-	std::cout<<"\033[5;0f\033[2K";
-}
 
-void printWords(int line){
+	std::cout<<"\033["<<round(size.ws_row/2.0)-5<<";"<<round(size.ws_col/2.0)-30<<"f";
+
 	srand(time(NULL));
-	std::cout<<"\033["<<line<<";0f";
+	
 	test="";
-	for(int i = 0; i<50; i++){
+	for(int i = 1; i<=50; i++){
 		int wordNumber = rand() % 100;
-		
+
 		test += words[wordNumber] + " ";
 
-		std::cout<<words[wordNumber]<<" ";
-		if(i == 25){
+		std::cout<<"\033[38;5;248m"<<words[wordNumber]<<" ";
+		if(i % 10 == 0){
 			test.pop_back();
 			test+="/";
-			std::cout<<"\n\r";
+
+			std::cout<<"\033["<<round(size.ws_row/2.0)+i/10-5<<";"<<round(size.ws_col/2.0)-30<<"f";
 		}
 	}
 
 	test.pop_back();
-	test+="/";
-}
-
-void startTimer(int seconds){
-	timerIsOn = true;
-	while(seconds!=0){
-		seconds--;
-		sleep(1);
-	}
-	timerIsOn = false;
-}
-
-bool returnIfTimerIsOn(){
-	return timerIsOn;
+	test+="*";
 }
 
 std::string returnTest(){
@@ -88,5 +68,5 @@ std::string returnTest(){
 }
 
 int returnSecondsTest(){
-	return secondsTest;
+	return duration.count();
 }

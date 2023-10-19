@@ -8,8 +8,7 @@ int main(){
 	system("stty raw");
 	while(true){
 		system("clear");
-		printWords(2);
-		selectTest();
+		printWords();
 		startTest();
 	}
 	return 0;

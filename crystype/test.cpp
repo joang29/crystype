@@ -1,9 +1,7 @@
-#include <bits/chrono.h>
 #include <chrono>
 #include <cmath>
 #include<iostream>
 #include<unistd.h>
-#include<thread>
 #include<sys/ioctl.h>
 
 #include "detectType.h"

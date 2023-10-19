@@ -1,9 +1,7 @@
-#include <asm-generic/ioctls.h>
-#include <cmath>
-#include <cstdio>
 #include<unistd.h>
 #include<vector>
 #include<sys/ioctl.h>
+#include<cmath>
 
 #include "test.h"
 

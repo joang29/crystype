@@ -1,5 +1,4 @@
 #include<iostream>
-#include <stdexcept>
 
 #include "test.h"
 #include "detectType.h"

@@ -1,4 +1,3 @@
-#include <asm-generic/ioctls.h>
 #include<iostream>
 #include<unistd.h>
 #include<cmath>

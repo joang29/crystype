@@ -32,7 +32,7 @@ void startTest(){
 	calculateWPMAndAccuracy();
 }
 
-void printWords(){
+void printWords(int numberOfWords){
 	
 	struct winsize size;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
@@ -43,7 +43,7 @@ void printWords(){
 	srand(time(NULL));
 	
 	test="";
-	for(int i = 1; i<=50; i++){
+	for(int i = 1; i<=numberOfWords; i++){
 		int wordNumber = rand() % 100;
 
 		test += words[wordNumber] + " ";

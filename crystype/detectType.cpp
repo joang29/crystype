@@ -35,6 +35,7 @@ void detectType(){
 			std::cout<<"\033["<<currentLine<<";"<<amountOfPressedKeys<<"f";
 			amountOfPressedKeys--;
 			cursorPositionX--;
+			finalTest.pop_back();
 			continue;
 		}
 

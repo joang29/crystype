@@ -9,15 +9,17 @@
 void calculateWPMAndAccuracy();
 void calculateCorrectedErrors();
 
+std::vector<int> errorsVector;
+
 void calculateWPMAndAccuracy(){
 	
 	int amountOfPressedKeysWithoutSpaces = returnAmountOfPressedKeysWithoutSpaces();
-	std::vector<int> errors = returnErrors();
+	errorsVector = returnErrors();
 	
 	//accuracy
 	int accuracy;
-	if(errors.empty()) accuracy = 100;
-	accuracy = (amountOfPressedKeysWithoutSpaces-errors.size())*100/amountOfPressedKeysWithoutSpaces;
+	if(errorsVector.empty()) accuracy = 100;
+	accuracy = (amountOfPressedKeysWithoutSpaces-errorsVector.size())*100/amountOfPressedKeysWithoutSpaces;
 	
 	//wpm
 	int typedWords = std::round(amountOfPressedKeysWithoutSpaces / 5);
@@ -25,7 +27,7 @@ void calculateWPMAndAccuracy(){
 	int secondsTest = returnSecondsTest();
 
 	calculateCorrectedErrors();
-	int errorsPenalty = errors.size()/(secondsTest/60.0);
+	int errorsPenalty = errorsVector.size()/(secondsTest/60.0);
 	int wpm = (typedWords / (secondsTest/60.0)) - errorsPenalty;
 	if(wpm < 0) wpm = 0;
 
@@ -42,11 +44,14 @@ void calculateWPMAndAccuracy(){
 }
 
 void calculateCorrectedErrors(){
-	std::vector<int> errors = returnErrors();
+	errorsVector = returnErrors();
 	std::string typingTest = returnTest();
 	std::string finalTest = returnFinalTest();
 
-	for(int i = 0; i<errors.size(); i++){
-		if(finalTest[errors[i]] == typingTest[errors[i]]) errors.erase(errors.begin());
+	for(int i = 0; i<errorsVector.size(); i++){
+		if(finalTest[errorsVector[i]] == typingTest[errorsVector[i]]){ 
+			errorsVector.erase(errorsVector.begin()+i-1);
+			i--;
+		}
 	}
 }

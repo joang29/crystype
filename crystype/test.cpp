@@ -12,7 +12,7 @@ std::string returnTest();
 
 std::chrono::duration<double> duration;
 std::string test;
-std::string words[100] = {"he", "she", "we", "they", "it", "you" ,"too", "have", "there", "write", "which", "where", "what", "who", "how", "all", "sometimes" ,"word", "world", "old", "can", "must", "might", "would", "make", "about", "know", "will", "as", "people", "like", "because", "tell", "always" ,"say", "find", "through", "life", "while", "person", "answer", "never", "problem", "believe", "point", "thought", "business", "city", "continue", "pay", "car", "however", "allow", "although", "home", "plan", "effect", "suggest", "action", "easy", "work", "between", "same", "program", "take", "high", "number", "custom", "star", "right" , "table", "ability", "character", "left", "expert", "cold", "avoid", "finish", "theory", "improve", "list", "lesson", "package", "range", "best", "style", "discover", "weight", "fly", "production", "impact", "talk", "me", "close", "imagine", "visit", "main", "note", "radio","laugh"};
+std::string words[150] = {"he", "she", "we", "they", "it", "you" ,"too", "have", "there", "write", "even", "which", "where", "what", "who", "by", "how", "all", "sometimes" ,"word", "world", "old", "can", "must", "might", "house", "with", "without", "would", "make", "about", "know", "will", "as", "people", "like", "because", "tell", "always" ,"say", "find", "through", "life", "while", "person", "answer", "never", "problem", "believe", "point", "thought", "business", "city", "continue", "pay", "car", "however", "allow", "although", "home", "plan", "effect", "suggest", "action", "easy", "work", "between", "same", "program", "take", "high", "number", "custom", "star", "right" , "table", "ability", "character", "left", "expert", "cold", "avoid", "finish", "theory", "improve", "list", "lesson", "package", "range", "best", "style", "discover", "weight", "fly", "production", "impact", "talk", "me", "close", "imagine", "visit", "main", "note", "radio", "nation","forget","laugh", "beach", "bed", "block", "chapter", "ever", "everything", "instead", "look", "loud", "depend", "date", "weather", "bank", "probably", "reply", "smile", "total", "yesterday", "today", "week", "weekend", "weekly", "test", "text", "teach", "think", "stuff", "sport", "someone", "some", "resolve", "principal", "is", "be", "understand", "tradition", "title", "than", "successful", "return", "quick", "ask", "publish"};
 	
 void startTest(){
 	struct winsize size;
@@ -32,7 +32,7 @@ void startTest(){
 	calculateWPMAndAccuracy();
 }
 
-void printWords(int numberOfWords){
+void printWords(){
 	
 	struct winsize size;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
@@ -43,8 +43,8 @@ void printWords(int numberOfWords){
 	srand(time(NULL));
 	
 	test="";
-	for(int i = 1; i<=numberOfWords; i++){
-		int wordNumber = rand() % 100;
+	for(int i = 1; i<=50; i++){
+		int wordNumber = rand() % 150;
 
 		test += words[wordNumber] + " ";
 

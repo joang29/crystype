@@ -19,7 +19,7 @@ void detectType(){
 
 	amountOfPressedKeysWithoutSpaces = 0, amountOfPressedKeys = 0;
 
-	int lines = round(size.ws_row/2.0)-5;
+	int lines = round(size.ws_row/2.0)-2;
 	int cols = round(size.ws_col/2.0)-30;
 	
 

@@ -18,9 +18,9 @@ void startTest(){
 	struct winsize size;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
 	
-	std::cout<<"\033[38;5;14m\033["<<round(size.ws_row/2.0)-6<<";"<<round(size.ws_col/2.0)-30<<"fPress any key to start";
+	std::cout<<"\033[38;5;14m\033["<<round(size.ws_row/2.0)-3<<";"<<round(size.ws_col/2.0)-30<<"fPress any key to start";
 	getchar();
-	std::cout<<"\033["<<round(size.ws_row/2.0)-6<<";"<<round(size.ws_col/2.0)-30<<"f\033[2K";
+	std::cout<<"\033["<<round(size.ws_row/2.0)-3<<";"<<round(size.ws_col/2.0)-30<<"f\033[2K";
 	
 	std::chrono::high_resolution_clock::time_point time = std::chrono::high_resolution_clock::now();
 
@@ -37,14 +37,20 @@ void printWords(){
 	struct winsize size;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
 	
+	int previousNumber = -1;
 
-	std::cout<<"\033["<<round(size.ws_row/2.0)-5<<";"<<round(size.ws_col/2.0)-30<<"f";
+	std::cout<<"\033["<<round(size.ws_row/2.0)-2<<";"<<round(size.ws_col/2.0)-30<<"f";
 
 	srand(time(NULL));
 	
 	test="";
 	for(int i = 1; i<=50; i++){
 		int wordNumber = rand() % 150;
+		
+		if(wordNumber==previousNumber){
+			i--; 
+			continue;
+		}else previousNumber = wordNumber;
 
 		test += words[wordNumber] + " ";
 
@@ -53,7 +59,7 @@ void printWords(){
 			test.pop_back();
 			test+="/";
 
-			std::cout<<"\033["<<round(size.ws_row/2.0)+i/10-5<<";"<<round(size.ws_col/2.0)-30<<"f";
+			std::cout<<"\033["<<round(size.ws_row/2.0)+i/10-2<<";"<<round(size.ws_col/2.0)-30<<"f";
 		}
 	}
 

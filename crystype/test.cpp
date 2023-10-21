@@ -44,7 +44,7 @@ void printWords(){
 	srand(time(NULL));
 	
 	test="";
-	for(int i = 1; i<=50; i++){
+	for(int i = 1; i<=40; i++){
 		int wordNumber = rand() % 150;
 		
 		if(wordNumber==previousNumber){

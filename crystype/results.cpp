@@ -30,7 +30,7 @@ void calculateWPMAndAccuracy(){
 	int errorsPenalty = errorsVector.size()/(secondsTest/60.0);
 	int wpm = (typedWords / (secondsTest/60.0)) - errorsPenalty;
 	if(wpm < 0) wpm = 0;
-
+	
 	struct winsize size;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
 
@@ -38,19 +38,18 @@ void calculateWPMAndAccuracy(){
 
 	sleep(2);
 
-	std::cout<<"\033["<<round(size.ws_row/2.0)+4<<";"<<round(size.ws_col/2.0)-30<<"f"<<"Press \033[38;5;45my\033[0m to do another typing test";
+	std::cout<<"\033["<<round(size.ws_row/2.0)+3<<";"<<round(size.ws_col/2.0)-30<<"f"<<"Press \033[38;5;45my\033[0m to do another typing test";
 	
 	if(getchar()!='y') exit(0);
 }
 
 void calculateCorrectedErrors(){
-	errorsVector = returnErrors();
 	std::string typingTest = returnTest();
 	std::string finalTest = returnFinalTest();
 
 	for(int i = 0; i<errorsVector.size(); i++){
 		if(finalTest[errorsVector[i]] == typingTest[errorsVector[i]]){ 
-			errorsVector.erase(errorsVector.begin()+i-1);
+			errorsVector.erase(errorsVector.begin()+i);
 			i--;
 		}
 	}

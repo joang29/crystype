@@ -13,6 +13,8 @@ void detectType();
 
 void detectType(){
 	typingTest = returnTest();
+	finalTest="";
+	errors.erase(errors.begin(), errors.end());
 		
 	struct winsize size;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
@@ -22,7 +24,6 @@ void detectType(){
 	int lines = round(size.ws_row/2.0)-2;
 	int cols = round(size.ws_col/2.0)-30;
 	
-
 	currentLine = lines;
 	cursorPositionX = cols;	
 

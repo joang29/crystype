@@ -13,3 +13,11 @@ cd crystype/crystype
 g++ *.cpp -o crystype
 sudo mv crystype /usr/local/bin
 ```
+
+# 📃 Usage 
+After installation simply run:
+```
+crystype
+```
+You can change the number of words with `1` (20 words), `2` (30 words) and `3` (40 words) keys (you can only do it before the typing test).
+

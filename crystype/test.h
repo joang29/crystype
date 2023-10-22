@@ -4,8 +4,7 @@
 #include<iostream>
 
 void startTest();
-void selectTest();
-void printWords();
+void printWords(int);
 bool returnIfTimerIsOn();
 std::string returnTest();
 int returnSecondsTest();

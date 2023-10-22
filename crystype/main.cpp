@@ -8,7 +8,7 @@ int main(){
 	std::cout<<"\e[5 q";
 	while(true){
 		system("clear");
-		printWords();
+		printWords(40);
 		startTest();
 	}
 	return 0;

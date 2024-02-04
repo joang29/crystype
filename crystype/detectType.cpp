@@ -44,7 +44,8 @@ void detectType(){
 			std::cout<<"\b\033[38;5;177m"<<pressedKey<<"\033[0m";
 		}else{
 			errors.push_back(amountOfPressedKeys);
-			std::cout<<"\b\033[38;5;1m"<<typingTest[amountOfPressedKeys]<<"\033[0m";
+			typingTest[amountOfPressedKeys] == ' ' ? std::cout<<"\b\033[38;5;1m"<<pressedKey<<"\033[0m" : 
+				                                 std::cout<<"\b\033[38;5;1m"<<typingTest[amountOfPressedKeys]<<"\033[0m";
 		}
 		if(pressedKey != ' ') amountOfPressedKeysWithoutSpaces++;
 		
